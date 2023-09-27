@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
-from market.models import User
+from manager.models import User
 
 
 class RegisterForm(FlaskForm):
@@ -26,3 +26,11 @@ class LoginForm(FlaskForm):
     username = StringField(label='User Name:', validators=[DataRequired()])
     password = PasswordField(label='Password:', validators=[DataRequired()])
     submit = SubmitField(label='Sign in')
+
+class AddDBForm(FlaskForm):
+    name = StringField(label='Database Name:', validators=[Length(min=2, max=30), DataRequired()]) 
+    type = StringField(label='Database Type:', validators=[Length(min=2, max=30), DataRequired()])
+    uri = StringField(label='Connection Uri:', validators=[Length(min=2, max=3000), DataRequired()])
+    username = StringField(label='Database Name:', validators=[Length(min=2, max=30), DataRequired()])
+    password = PasswordField(label='Password:', validators=[Length(min=6), DataRequired()])
+    submit = SubmitField(label='Add Database')
